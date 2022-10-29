@@ -1,0 +1,29 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+<div>
+    <button value="DialogTest" @onclick="Dialog_Click"> Dialog box popup</button>
+</div>
+
+<ConfirmBox @ref="confirmBox" UserChoice="ConfirmMesssage_Click"></ConfirmBox>
+@code{
+    protected ConfirmBox confirmBox { get; set; }
+
+    protected void Dialog_Click()
+    {
+        confirmBox.Show("Dialog box show button click.");
+    }
+    protected async Task ConfirmMesssage_Click(bool actionConfirmed)
+    {
+        if(actionConfirmed)
+        {
+            //Need to add the code which need to action with data record.
+        }
+    }
+}

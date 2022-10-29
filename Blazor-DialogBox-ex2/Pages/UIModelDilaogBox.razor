@@ -1,0 +1,75 @@
+﻿@page "/modeldialogbox"
+@using System.Threading;
+@using Blazor_DialogBox_ex2.Components;
+
+<h3>UIModelDilaogBox</h3>
+@*<button value="DialogTest" @onclick="Dialog_Click"> Dialog box popup</button>*@
+<div>
+    <button type="button" class="btn btn-danger btn-sm" @onclick="OpenModelDialog"> Dialog call</button>
+</div>
+
+@*@if(ModelDialogOpen)
+{*@
+    <ConfirmBox @ref="_confirmBox" Title="Info Dialog" UserChoice="ConfirmMesssage_Click"></ConfirmBox>
+@*}*@
+   
+
+@code {
+    //https://www.youtube.com/watch?v=udb6DNKZyhU&ab_channel=ClaudioBernasconi
+    public bool ModelDialogOpen { get; set; } = false;
+
+    protected ConfirmBox _confirmBox { get; set; }
+
+    protected async Task ConfirmMesssage_Click(bool actionConfirmed)
+    {
+        if (actionConfirmed)
+        {
+            //Need to add the code which need to action with data record.
+        }
+    }
+    protected void Dialog_Click()
+    {
+        _confirmBox.Show("Dialog box$ show button click.");
+    }
+    private void OpenModelDialog()
+    {
+        //ModelDialogOpen = true;
+        _confirmBox.Show("Dialog box show button click.");
+    }
+    private static bool isFinished = false;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        ModelDialogOpen = false;
+        _confirmBox = new ConfirmBox();
+        await LoadData(1000);
+        await BackgroundWork();
+    }
+
+
+    public static async Task LoadData(int num)
+    {
+        await Task.Factory.StartNew(() => Thread.Sleep(num));
+    }
+    // Using async void to kickoff a background operation that nobody wants to be notified about when it completes.
+    static async Task BackgroundWork()
+    {
+        // It's important to catch exceptions so we don't crash the appliation.
+        try
+        {
+            // This operation will end after ten interations or when the app closes. Whichever happens first.
+            for (var count = 1; count <= 10 && !isFinished; count++)
+            {
+                await Task.Delay(1000);
+                Console.WriteLine($"{count} seconds of work elapsed.");
+            }
+            Console.WriteLine("Background operation came to an end.");
+        }
+        catch (Exception x)
+        {
+            Console.WriteLine("Caught exception:");
+            Console.WriteLine(x.ToString());
+        }
+    }
+}
