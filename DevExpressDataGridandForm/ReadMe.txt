@@ -6,8 +6,6 @@ Author
 💞️ I’m looking to collaborate on Dotnet core 6, Blazor, MVC, ASP, Microsoft SQL, Embeded Technology
 📫 How to reach me? Call +60166876896 or email: kiritshah234@gmail.com
 \\\
-This example shows following
-1)async and wait keyword
-2)ModelDilogbox from base component to another component
-3)event call back between parent and child component.
-4)Troublshooing by introducing try and catch block and generating exception which can vew in consol popup window.
+
+This example use DeveExpress and shows following demo
+DxGrid (DataGrid) and seperate form for add new or edit existing record.
